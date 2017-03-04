@@ -7,15 +7,64 @@
         <event_name>x_27018_slack.slack_message</event_name>
         <name>Send Slack Message</name>
         <order>100</order>
-        <script><![CDATA[var message = JSON.parse(event.parm2);
+        <script><![CDATA[(function executeRule(current) {
+	var trigger = new GlideRecord('x_27018_slack_slack_trigger');
+	if(trigger.get(event.parm1)){
+		var endpoint = trigger.webhook.endpoint;
 
-var trigger = new GlideRecord('x_27018_slack_slack_trigger');
-if(trigger.get(event.parm1)){
-	var endpoint = trigger.webhook.endpoint;
-	
-	var request = new SlackWebhook(endpoint);
-	request.sendMessage(message.text);
-}]]></script>
+		var text = trigger.getValue('text');
+
+		//Replace variables with value
+		var regex = /\${(.*?)}/g;
+		var matching = []; //Temp variable for matching
+		var matches = [];
+
+		while(matching = regex.exec(text)){
+			var match = [matching[0], matching[1]];
+			matches.push(match);
+		}
+
+		matches.forEach(function(match){
+			var isLink = false;
+			var linkType;
+			
+			var dotWalk = match[1].split('.');
+			var glideElement = current;
+			dotWalk.forEach(function(element, index){
+				if(element == 'URI_REF' || element == 'URI'){
+					isLink = true;
+					linkType = element;
+					if(index > 0){
+						//If we're not acting on current, we need to get the gliderecord to be able to retrieve the URL
+						glideElement = glideElement.getRefRecord();
+					}
+				}
+				else{
+					glideElement = glideElement[element];
+				}
+			});
+			
+			if(glideElement.getDisplayValue() != ''){
+				if(isLink){
+					var display;
+					if(linkType == 'URI_REF')
+						display = glideElement.getDisplayValue();
+					else if(linkType == 'URI')
+						display = 'LINK';
+					var url = gs.getProperty('glide.servlet.uri') + 'nav_to.do?uri=' + encodeURIComponent(glideElement.getLink());
+					text = text.replace(match[0], '<' + url + '|' + display + '>');
+				}
+				else
+					text = text.replace(match[0], glideElement.getDisplayValue());
+			}
+			else
+				text = text.replace(match[0], gs.getMessage('Empty'));
+		});
+
+		var request = new SlackWebhook(endpoint);
+		request.sendMessage(text);
+	}
+})(current);]]></script>
         <synchronous>false</synchronous>
         <sys_class_name>sysevent_script_action</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -24,7 +73,7 @@ if(trigger.get(event.parm1)){
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f038e0690f953200f52b09ece1050ea6</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_name>Send Slack Message</sys_name>
         <sys_overrides/>
         <sys_package display_value="Slack Integration" source="x_27018_slack">7cf63f5d0f513200f52b09ece1050e33</sys_package>
@@ -33,6 +82,6 @@ if(trigger.get(event.parm1)){
         <sys_scope display_value="Slack Integration">7cf63f5d0f513200f52b09ece1050e33</sys_scope>
         <sys_update_name>sysevent_script_action_f038e0690f953200f52b09ece1050ea6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-03-04 04:12:30</sys_updated_on>
+        <sys_updated_on>2017-03-04 18:06:30</sys_updated_on>
     </sysevent_script_action>
 </record_update>

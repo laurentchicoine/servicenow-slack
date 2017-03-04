@@ -21,8 +21,8 @@
         <default_value/>
         <defaultsort/>
         <delete_roles/>
-        <dependent/>
-        <dependent_on_field/>
+        <dependent>table</dependent>
+        <dependent_on_field>table</dependent_on_field>
         <display>false</display>
         <dynamic_creation>false</dynamic_creation>
         <dynamic_creation_script/>
@@ -31,7 +31,7 @@
         <element>text</element>
         <element_reference>false</element_reference>
         <foreign_database/>
-        <internal_type display_value="">string_full_utf8</internal_type>
+        <internal_type display_value="">email_script</internal_type>
         <mandatory>false</mandatory>
         <max_length>4000</max_length>
         <name>x_27018_slack_slack_trigger</name>
@@ -54,7 +54,7 @@
         <sys_created_on>2017-03-04 02:26:39</sys_created_on>
         <sys_customer_update>true</sys_customer_update>
         <sys_id>8cae84210f553200f52b09ece1050efd</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Text</sys_name>
         <sys_package display_value="Slack Integration" source="x_27018_slack">7cf63f5d0f513200f52b09ece1050e33</sys_package>
         <sys_policy/>
@@ -62,11 +62,11 @@
         <sys_scope display_value="Slack Integration">7cf63f5d0f513200f52b09ece1050e33</sys_scope>
         <sys_update_name>sys_dictionary_x_27018_slack_slack_trigger_text</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-03-04 02:26:39</sys_updated_on>
+        <sys_updated_on>2017-03-04 13:15:25</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
-        <use_dependent_field>false</use_dependent_field>
+        <use_dependent_field>true</use_dependent_field>
         <use_dynamic_default>false</use_dynamic_default>
         <use_reference_qualifier>simple</use_reference_qualifier>
         <virtual>false</virtual>

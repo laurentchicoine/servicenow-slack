@@ -50,9 +50,7 @@
 	
 	var script = '(function executeRule(current, previous /*null when async*/) {' + '\n';
 	
-	script += '\t' + 'var message = {};' + '\n';
-	script += '\t' + 'message.text = "' + current.text + '";' + '\n';
-	script += '\t' + 'gs.eventQueue("x_27018_slack.slack_message", current, "' + current.getUniqueValue() + '", JSON.stringify(message));' + '\n';
+	script += '\t' + 'gs.eventQueue("x_27018_slack.slack_message", current, "' + current.getUniqueValue() + '");' + '\n';
 	
 	script += '})(current, previous);';
 	
@@ -72,7 +70,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>60045c650f553200f52b09ece1050e91</sys_id>
-        <sys_mod_count>13</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>Insert/Update Slack Trigger</sys_name>
         <sys_overrides/>
         <sys_package display_value="Slack Integration" source="x_27018_slack">7cf63f5d0f513200f52b09ece1050e33</sys_package>
@@ -81,7 +79,7 @@
         <sys_scope display_value="Slack Integration">7cf63f5d0f513200f52b09ece1050e33</sys_scope>
         <sys_update_name>sys_script_60045c650f553200f52b09ece1050e91</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2017-03-04 04:03:25</sys_updated_on>
+        <sys_updated_on>2017-03-04 13:05:52</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>
