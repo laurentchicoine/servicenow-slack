@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Slack Webhook" max_length="40" name="x_27018_slack_slack_webhook" type="collection">
+        <element label="Endpoint" max_length="200" name="endpoint" type="string"/>
+        <element display="true" label="Name" mandatory="true" max_length="40" name="name" type="string"/>
+        <element label="Owner group" max_length="32" name="owner_group" reference="sys_user_group" reference_qual="active=true^sys_id=javascript: getMyGroups()^EQ" type="reference" use_reference_qualifier="advanced"/>
+        <index name="index">
+            <element name="owner_group"/>
+        </index>
+    </element>
+</database>

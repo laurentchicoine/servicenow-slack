@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="Slack Integration">288904a90f153200f52b09ece1050ea1</application>
+        <filter/>
+        <name>Slack Triggers</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>x_27018_slack.user</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-03-04 02:10:21</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>fd5d84ad0f153200f52b09ece1050e18</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Slack Triggers</sys_name>
+        <sys_package display_value="Slack Integration" source="x_27018_slack">7cf63f5d0f513200f52b09ece1050e33</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Slack Integration">7cf63f5d0f513200f52b09ece1050e33</sys_scope>
+        <sys_update_name>sys_ui_module_fd5d84ad0f153200f52b09ece1050e18</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-03-04 02:10:21</sys_updated_on>
+        <table>x_27018_slack_slack_trigger</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+</record_update>

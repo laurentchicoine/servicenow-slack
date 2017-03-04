@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_27018_slack_slack_trigger</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Insert/Update Slack Trigger</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+
+	var br;
+	if(current.business_rule.nil()){
+		br = new GlideRecord('sys_script');
+		br.initialize();
+	}
+	else{
+		br = current.business_rule.getRefRecord();
+	}
+	
+	br.name = 'Slack Trigger: ' + current.name;
+	br.collection = current.table;
+	br.active = current.active;
+	br.advanced = true;
+	br.when = 'after';
+	br.action_insert = current.action_insert;
+	br.action_update = current.action_update;
+	br.filter_condition = current.filter_conditions;
+	
+	var script = '(function executeRule(current, previous /*null when async*/) {' + '\n';
+	
+	script += '\t' + 'var message = {};' + '\n';
+	script += '\t' + 'message.text = "' + current.text + '";' + '\n';
+	script += '\t' + 'gs.eventQueue("x_27018_slack.slack_message", current, "' + current.getUniqueValue() + '", JSON.stringify(message));' + '\n';
+	
+	script += '})(current, previous);';
+	
+	br.script = script;
+	
+	br.sys_policy = 'read'; //Make sure this maintained BR is not edited manually by administrators
+	br.update();
+	
+	current.business_rule = br.getUniqueValue();
+	current.update();
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-03-04 02:40:17</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>60045c650f553200f52b09ece1050e91</sys_id>
+        <sys_mod_count>13</sys_mod_count>
+        <sys_name>Insert/Update Slack Trigger</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Slack Integration" source="x_27018_slack">7cf63f5d0f513200f52b09ece1050e33</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="Slack Integration">7cf63f5d0f513200f52b09ece1050e33</sys_scope>
+        <sys_update_name>sys_script_60045c650f553200f52b09ece1050e91</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-03-04 04:03:25</sys_updated_on>
+        <template/>
+        <when>after</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=60045c650f553200f52b09ece1050e91"/>
+</record_update>
